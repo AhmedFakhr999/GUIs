@@ -2,8 +2,10 @@ name: Birthday Wisher Bot
 
 on:
   schedule:
-    - cron: '0 8 * * *' 
-  workflow_dispatch:      
+    # This runs at 08:00 UTC every day (10:00 AM Egypt time)
+    - cron: '0 8 * * *'
+  # This allows you to run it manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
   run-script:
@@ -18,11 +20,15 @@ jobs:
           python-version: '3.10'
 
       - name: Install Dependencies
+        # GitHub servers are blank, so we must install these every time
         run: |
           pip install pandas requests
 
       - name: Run Python Script
         env:
+          # These link to the Secrets you created in Repository Settings
           MY_EMAIL: ${{ secrets.MY_EMAIL }}
           MY_EMAIL_PASSWORD: ${{ secrets.MY_PASSWORD }}
+        # This tells GitHub to enter your specific folders before running
+        working-directory: "./Birthday_TO_ME/Birthday Wisher (Day 32) start"
         run: python main.py
