@@ -26,9 +26,8 @@ jobs:
 
       - name: Run Python Script
         env:
-          # These link to the Secrets you created in Repository Settings
           MY_EMAIL: ${{ secrets.MY_EMAIL }}
-          MY_EMAIL_PASSWORD: ${{ secrets.MY_PASSWORD }}
-        # This tells GitHub to enter your specific folders before running
+          MY_PASSWORD: ${{ secrets.MY_PASSWORD }} # Use this name to match your Python script
         working-directory: "./Birthday_TO_ME/Birthday Wisher (Day 32) start"
         run: python main.py
+        
